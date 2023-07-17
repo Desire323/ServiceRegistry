@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  service-registry:
+    build: ./
+    image: service-registry
+    container_name: service-registry
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_APPLICATION_NAME: service-registry
+#      USER_SERVICE_URL: http://user-service:8080
+#      SERVICE_REGISTRY_URL: http://service-registry:8761/eureka
+      AUTHENTICATION_SERVICE_URL: http://authentication-service:8080
+    ports:
+      - "8761:8761"
+    networks:
+      - desire
+
+networks:
+  desire:
+    external: true
